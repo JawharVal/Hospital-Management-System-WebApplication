@@ -9,7 +9,7 @@ This project is a Java application for managing departments and patients within 
 - Create, read, update, and delete operations for both departments and patients.
 - Dependency injection using a `BeanFactory` class with `@Inject` and `@Component` annotations.
 - Utilizes Lombok for reducing boilerplate code.
-- Interactive console interface for user input to perform CRUD operations.
+- Interactive interface  to perform CRUD operations.
 - Servlets usage
 - jsp implementation
 
