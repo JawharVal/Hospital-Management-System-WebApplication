@@ -2,7 +2,7 @@
 Attestation 3/Java/3rd year/1st semester.
 # Hospital Management System
 
-This project is a Java application for managing departments and patients within them using CRUD (Create, Read, Update, Delete) operations. It provides web application with user interface for interacting with the system.
+This project is a Java application for managing departments and patients within them using CRUD (Create, Read, Update, Delete) operations. It provides web application with user interface for interacting with the system and saving into database.
 
 ## Features
 
@@ -12,17 +12,13 @@ This project is a Java application for managing departments and patients within 
 - Interactive interface  to perform CRUD operations.
 - Servlets usage
 - jsp implementation
+- MySql Database
 
 ## Prerequisites
 
 - Java Development Kit (JDK) installed 
 - Apache Maven for building the project 
-- Lombok apache implementation
+- Lombok apache configuration
   
-## Getting Started
-Usage
-
-The application will display appropriate messages and updates based on the user's choices.
-
 Dependencies
 Lombok: Used for reducing boilerplate code.
