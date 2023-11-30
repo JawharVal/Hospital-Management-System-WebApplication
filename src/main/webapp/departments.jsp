@@ -152,19 +152,32 @@
         opacity: 0.9;
     }
 
-    @keyframes ripple{
-        0%{
+    @keyframes ripple {
+        0% {
             transform: scale(0.8);
         }
-
-        50%{
+        50% {
             transform: scale(1.2);
         }
-
-        100%{
+        100% {
             transform: scale(0.8);
         }
+    }
 
+    @keyframes ripples {
+        0% {
+            transform: scale(0.8);
+        }
+        50% {
+            transform: scale(1.0);
+        }
+        100% {
+            transform: scale(0.8);
+        }
+    }
+
+    .btn-primary {
+        animation: ripples 5s infinite 0s;
     }
     body{
         font-family: 'Exo', sans-serif;
@@ -207,15 +220,15 @@
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <h2 align="center"><strong>Departments</strong></h2>
+                <a href="addDepartment.jsp" class="btn btn-primary">Add Department</a>
                 <div class="card">
-                <div class="card-body">
+                    <div class="card-body">
                 <table class="table table-bordered table-hover" align="center">
                     <thead>
                     <tr>
                         <th>Department ID</th>
                         <th>Department Name</th>
                         <th>Number of Patients</th>
-                        <th>Action</th>
                         <th>Action</th>
                         <th>Action</th>
                     </tr>
@@ -231,8 +244,6 @@
                         <td><%= department.getId() %></td>
                         <td><%= department.getName() %></td>
                         <td><%= department.getNumberOfPatients() %></td>
-                        <td>
-                            <a href="addDepartment.jsp" class="btn btn-primary">Add</a>
                         <td>
                             <a href="EditDepartmentServlet?departmentId=<%= department.getId() %>" class="btn btn-warning">Edit</a>
                         </td>

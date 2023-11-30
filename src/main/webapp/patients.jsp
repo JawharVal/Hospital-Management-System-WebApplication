@@ -115,6 +115,21 @@
         background: #ea8137;
     }
 
+    .btn.btn-success {
+
+        background-color: #ea6d15;
+        color: #fff;
+        padding: 5px 15px;
+        border-radius: 4px;
+        font-size: 16px;
+        text-decoration: none;
+        border: none;
+        outline: none;
+    }
+
+    .btn.btn-success:hover {
+        background-color: #ff9d5a;
+    }
 
     .circle{
         position: absolute;
@@ -192,6 +207,25 @@
         }
 
     }
+
+    @keyframes ripples{
+        0%{
+            transform: scale(0.8);
+        }
+
+        50%{
+            transform: scale(0.98);
+        }
+
+        100%{
+            transform: scale(0.8);
+        }
+
+    }
+    .btn-success {
+        animation: ripples 5s infinite 0s;
+    }
+
     body{
         font-family: 'Exo', sans-serif;
     }
@@ -233,6 +267,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <h2 align="center"><strong>Patients</strong></h2>
+                <a href="addPatients.jsp" class="btn btn-success">Add Patient</a>
                 <div class="card">
                     <div class="card-body">
                         <table class="table table-bordered table-hover" align="center">
@@ -243,7 +278,6 @@
                                 <th>Age</th>
                                 <th>Gender</th>
                                 <th>Department</th>
-                                <th>Action</th>
                                 <th>Action</th>
                                 <th>Action</th>
                             </tr>
@@ -261,9 +295,6 @@
                                 <td><%= patient.getAge() %></td>
                                 <td><%= patient.getGender() %></td>
                                 <td><%= patient.getDepartment().getName() %></td>
-                                <td>
-                                    <a href="addPatients.jsp" class="btn btn-primary">Add</a>
-                                </td>
                                 <td>
                                     <a href="EditPatientServlet?patientId=<%= patient.getId() %>" class="btn btn-warning">Edit</a>
                                 </td>
@@ -284,9 +315,9 @@
             </div>
         </div>
     </section>
-
+    <jsp:include page="footer.jsp" />
 </main>
-<jsp:include page="footer.jsp" />
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

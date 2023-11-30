@@ -186,7 +186,7 @@
 
           <div class="mb-3">
             <label for="department" class="form-label">Department:</label>
-            <select id="department" name="department" class="form-select">
+            <select id="department" name="department" class="form-select" required>
               <option value="" disabled selected>Add department</option>
               <%
                 try {
@@ -216,5 +216,6 @@
   <jsp:include page="footer.jsp" />
 
 </main>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
