@@ -5,6 +5,7 @@ import org.example.DI.BeanFactory;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 
+// for injecting dependency for servlets
 public abstract class BaseServlet extends HttpServlet {
 
     @Override

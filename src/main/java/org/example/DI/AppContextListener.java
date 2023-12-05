@@ -4,6 +4,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
+//для init beanfactory
 @WebListener
 public class AppContextListener implements ServletContextListener {
 

@@ -182,7 +182,7 @@
               </div>
               <div class="mb-3">
                 <label for="gender" class="form-label">Gender:</label>
-                <select id="gender" name="gender" class="form-control" required>
+                <select id="gender" name="gender" class="form-select" required>
                   <option value="" disabled selected>Choose Gender</option>
                   <option value="Male" ${patientGender == 'Male' ? 'selected' : ''}>Male</option>
                   <option value="Female" ${patientGender == 'Female' ? 'selected' : ''}>Female</option>
