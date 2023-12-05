@@ -206,12 +206,9 @@ public class PatientDAO implements PatientRepository {
                 Department department;
                 // department_id is a foreign key in patients table
                 int departmentId = resultSet.getInt("department_id");
-                if (cache.isDepartmentInCache(departmentId)) {
-                    department = cache.getDepartment(departmentId);
-                } else {
-                    department = departmentDAO.getDepartmentById(departmentId);
-                    cache.addupdateDepartment(department);
-                }
+                department = departmentDAO.getDepartmentById(departmentId);
+                cache.addupdateDepartment(department);
+
                 patient.setDepartment(department);
                 patients.add(patient);
                 // Use addUpdatePatient method to add or update each patient in the cache
