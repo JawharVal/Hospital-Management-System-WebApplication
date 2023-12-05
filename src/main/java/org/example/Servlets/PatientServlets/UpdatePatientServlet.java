@@ -7,6 +7,8 @@ import org.example.Servlets.BaseServlet;
 import org.example.models.Department;
 import org.example.models.Patient;
 import org.example.repositories.DepartmentRepository;
+import org.example.repositories.PatientRepository;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +20,7 @@ import java.sql.SQLException;
 @WebServlet("/UpdatePatientServlet")
 public class UpdatePatientServlet extends BaseServlet {
     @Inject
-    private PatientDAO patientDAO;
+    private PatientRepository patientRepository;
     @Inject
     private DepartmentRepository departmentRepository;
 
@@ -32,12 +34,12 @@ public class UpdatePatientServlet extends BaseServlet {
         try {
             Department department = departmentRepository.getDepartmentById(departmentId);
             if (department != null) {
-                Patient patient = patientDAO.getPatientById(patientId);
+                Patient patient = patientRepository.getPatientById(patientId);
                 patient.setFullName(patientName);
                 patient.setAge(patientAge);
                 patient.setGender(patientGender);
                 patient.setDepartment(department);
-                patientDAO.updatePatient(patient);
+                patientRepository.updatePatient(patient);
 
                 response.sendRedirect(request.getContextPath() + "/patients.jsp");
             } else {

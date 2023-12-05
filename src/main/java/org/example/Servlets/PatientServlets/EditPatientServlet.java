@@ -5,6 +5,8 @@ import org.example.DI.Component;
 import org.example.DI.Inject;
 import org.example.Servlets.BaseServlet;
 import org.example.models.Patient;
+import org.example.repositories.PatientRepository;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +19,7 @@ import java.sql.SQLException;
 public class EditPatientServlet extends BaseServlet {
 
     @Inject
-    private PatientDAO patientDAO;
+    private PatientRepository patientRepository;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String patientIdParam = request.getParameter("patientId");
@@ -25,7 +27,7 @@ public class EditPatientServlet extends BaseServlet {
         if (patientIdParam != null) {
             try {
                 int patientId = Integer.parseInt(patientIdParam);
-                Patient patient = patientDAO.getPatientById(patientId);
+                Patient patient = patientRepository.getPatientById(patientId);
 
                 // Set the patient data as request attributes
                 request.setAttribute("patientId", patient.getId());

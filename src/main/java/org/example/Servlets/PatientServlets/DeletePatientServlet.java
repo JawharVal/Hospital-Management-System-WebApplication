@@ -4,6 +4,8 @@ import org.example.DAO.PatientDAO;
 import org.example.DI.Component;
 import org.example.DI.Inject;
 import org.example.Servlets.BaseServlet;
+import org.example.repositories.PatientRepository;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +17,7 @@ import java.sql.SQLException;
 @WebServlet("/DeletePatientServlet")
 public class DeletePatientServlet extends BaseServlet {
     @Inject
-    private PatientDAO patientDAO;
+    private PatientRepository patientRepository;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String patientIdParam = request.getParameter("patientId");
@@ -23,7 +25,7 @@ public class DeletePatientServlet extends BaseServlet {
         if (patientIdParam != null) {
             try {
                 int patientId = Integer.parseInt(patientIdParam);
-                patientDAO.deletePatient(patientId);
+                patientRepository.deletePatient(patientId);
 
                 response.sendRedirect(request.getContextPath() + "/patients.jsp");
             } catch (NumberFormatException | SQLException e) {
