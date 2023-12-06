@@ -242,7 +242,11 @@
                     %>
                     <tr>
                         <td><%= department.getId() %></td>
-                        <td><%= department.getName() %></td>
+                        <td>
+                            <a href="DepartmentDetails.jsp?departmentId=<%= department.getId() %>">
+                                <%= department.getName() %>
+                            </a>
+                        </td>
                         <td><%= department.getNumberOfPatients() %></td>
                         <td>
                             <a href="EditDepartmentServlet?departmentId=<%= department.getId() %>" class="btn btn-warning">Edit</a>
