@@ -219,7 +219,8 @@ public class HospitalApp {
                     System.out.print("Enter the patient's name to update: ");
                     String patientNameToUpdate = scanner.next();
                     try {
-                        Patient patientToUpdate = patientRepository.getPatientByName(patientNameToUpdate);
+//                        Patient patientToUpdate = patientRepository.getPatientByName(patientNameToUpdate);
+                        Patient patientToUpdate = (Patient) patientRepository.getPatientsByName(patientNameToUpdate);
                         if (patientToUpdate != null) {
                             String newFullName;
                             do {

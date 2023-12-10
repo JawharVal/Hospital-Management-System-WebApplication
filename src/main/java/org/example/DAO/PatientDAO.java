@@ -79,6 +79,7 @@ public class PatientDAO implements PatientRepository {
         }
     }
 
+
     // Delete
     public void deletePatient(int id) throws SQLException {
         try {
@@ -92,7 +93,6 @@ public class PatientDAO implements PatientRepository {
                 // Decrement the department's patient count
                 Department department = patient.getDepartment();
                 department.decrementPatients();
-
             }
 
             // Now delete the patient
@@ -113,43 +113,19 @@ public class PatientDAO implements PatientRepository {
         }
     }
 
-    public Patient getPatientByName(String name) throws SQLException {
-        // Since we don't have a cache by name, we need to query the database
-        try {
-            session.beginTransaction();  // Start a transaction
-            String sql = "SELECT * FROM patients WHERE fullname = ?";
-            PreparedStatement statement = session.getConnection().prepareStatement(sql);
-            statement.setString(1, name);
-            ResultSet resultSet = statement.executeQuery();
-
-            if (resultSet.next()) {
-                Patient patient = new Patient();
-                patient.setId(resultSet.getInt("id"));
-                patient.setFullName(resultSet.getString("fullname"));
-                patient.setAge(resultSet.getInt("age"));
-                patient.setGender(resultSet.getString("gender"));
-                // department_id is a foreign key in patients table
-                int departmentId = resultSet.getInt("department_id");
-                Department department = departmentDAO.getDepartmentById(departmentId);
-                patient.setDepartment(department);
-                // Update the patient in the cache
-                cache.addUpdatePatient(patient);
-                session.commit();
-                return patient;
-            } else {
-                session.commit();
-                return null;
-            }
-
-        } catch (SQLException e) {
-            // Rollback the transaction in case of an error
-            session.rollback();
-            throw e;
-        }
-    }
-
     public List<Patient> getPatientsByName(String name) throws SQLException {
-        // Since we don't have a cache by name, we need to query the database
+        // Check if the patients are in the cache first
+        List<Patient> patientsInCache = new ArrayList<>();
+        for (Patient patient : cache.getAllPatients()) {
+            if (patient.getFullName().equals(name)) {
+                patientsInCache.add(patient);
+            }
+        }
+        if (!patientsInCache.isEmpty()) {
+            System.out.println("***Returned patients from cache");
+            return patientsInCache;
+        }
+        // If the patients are not in the cache, query the database
         try {
             session.beginTransaction();  // Start a transaction
             List<Patient> patients = new ArrayList<>();
@@ -166,21 +142,15 @@ public class PatientDAO implements PatientRepository {
                 patient.setGender(resultSet.getString("gender"));
                 // department_id is a foreign key in patients table
                 int departmentId = resultSet.getInt("department_id");
-                Department department;
-                if (cache.isDepartmentInCache(departmentId)) {
-                    department = cache.getDepartment(departmentId);
-                } else {
-                    department = departmentDAO.getDepartmentById(departmentId);
-                    cache.addupdateDepartment(department);
-                }
+                Department department = departmentDAO.getDepartmentById(departmentId);
                 patient.setDepartment(department);
-                patients.add(patient);
-                session.commit();
-                // Add each patient to the cache
+                // Update the patient in the cache
                 cache.addUpdatePatient(patient);
+                patients.add(patient);
             }
-
+            session.commit();
             return patients;
+
         } catch (SQLException e) {
             // Rollback the transaction in case of an error
             session.rollback();
@@ -211,7 +181,7 @@ public class PatientDAO implements PatientRepository {
 
                 patient.setDepartment(department);
                 patients.add(patient);
-                // Use addUpdatePatient method to add or update each patient in the cache
+                // update each patient in the cache
                 cache.addUpdatePatient(patient);
             }
 
@@ -226,7 +196,11 @@ public class PatientDAO implements PatientRepository {
 
 
     public Patient getPatientById(int id) throws SQLException {
-        // Query the database to retrieve a patient by ID
+        // Check if the patient is in the cache first
+        if (cache.isPatientInCache(id)) {
+            System.out.println("***Returned patient from cache");
+            return cache.getPatient(id);
+        }
         try {
             session.beginTransaction();  // Start a transaction
             String sql = "SELECT * FROM patients WHERE id = ?";

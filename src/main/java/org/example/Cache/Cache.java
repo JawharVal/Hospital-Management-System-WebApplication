@@ -37,9 +37,9 @@ public class Cache {
     }
 
     // Patient cache methods
-//    public Patient getPatient(int id) {
-//        return patientCache.get(id);
-//    }
+    public Patient getPatient(int id) {
+        return patientCache.get(id);
+   }
 
     public void putPatient(Patient patient) {
         patientCache.put(patient.getId(), patient);

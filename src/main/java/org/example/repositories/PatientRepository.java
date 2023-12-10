@@ -11,6 +11,5 @@ public interface PatientRepository {
     List<Patient> getAllPatients() throws SQLException;
     void updatePatient(Patient patient) throws SQLException;
     void deletePatient(int id) throws SQLException;
-    Patient getPatientByName(String name) throws SQLException;
     Patient getPatientById(int id) throws SQLException;
 }
