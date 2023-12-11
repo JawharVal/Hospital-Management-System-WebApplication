@@ -10,7 +10,6 @@ public interface DepartmentRepository {
     Department getDepartmentById(int id) throws SQLException;
     int getNumberOfPatientsInDepartment(int departmentId) throws SQLException;
     List<Department> getAllDepartments() throws SQLException;
-    Department getDepartmentByName(String name) throws SQLException;
     void updateDepartment(Department department) throws SQLException;
     void deleteDepartment(int id) throws SQLException;
 

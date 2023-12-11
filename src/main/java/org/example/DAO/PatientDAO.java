@@ -113,51 +113,6 @@ public class PatientDAO implements PatientRepository {
         }
     }
 
-    public List<Patient> getPatientsByName(String name) throws SQLException {
-        // Check if the patients are in the cache first
-        List<Patient> patientsInCache = new ArrayList<>();
-        for (Patient patient : cache.getAllPatients()) {
-            if (patient.getFullName().equals(name)) {
-                patientsInCache.add(patient);
-            }
-        }
-        if (!patientsInCache.isEmpty()) {
-            System.out.println("***Returned patients from cache");
-            return patientsInCache;
-        }
-        // If the patients are not in the cache, query the database
-        try {
-            session.beginTransaction();  // Start a transaction
-            List<Patient> patients = new ArrayList<>();
-            String sql = "SELECT * FROM patients WHERE fullname = ?";
-            PreparedStatement statement = session.getConnection().prepareStatement(sql);
-            statement.setString(1, name);
-            ResultSet resultSet = statement.executeQuery();
-
-            while (resultSet.next()) {
-                Patient patient = new Patient();
-                patient.setId(resultSet.getInt("id"));
-                patient.setFullName(resultSet.getString("fullname"));
-                patient.setAge(resultSet.getInt("age"));
-                patient.setGender(resultSet.getString("gender"));
-                // department_id is a foreign key in patients table
-                int departmentId = resultSet.getInt("department_id");
-                Department department = departmentDAO.getDepartmentById(departmentId);
-                patient.setDepartment(department);
-                // Update the patient in the cache
-                cache.addUpdatePatient(patient);
-                patients.add(patient);
-            }
-            session.commit();
-            return patients;
-
-        } catch (SQLException e) {
-            // Rollback the transaction in case of an error
-            session.rollback();
-            throw e;
-        }
-    }
-
     public List<Patient> getAllPatients() throws SQLException {
         try {
             session.beginTransaction();
@@ -193,7 +148,6 @@ public class PatientDAO implements PatientRepository {
             throw e;
         }
     }
-
 
     public Patient getPatientById(int id) throws SQLException {
         // Check if the patient is in the cache first

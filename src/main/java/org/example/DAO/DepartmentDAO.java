@@ -123,36 +123,6 @@ public class DepartmentDAO implements DepartmentRepository {
         }
     }
 
-    public Department getDepartmentByName(String name) throws SQLException {
-        try {
-            session.beginTransaction();
-
-            String sql = "SELECT * FROM departments WHERE name = ?";
-            PreparedStatement statement = session.getConnection().prepareStatement(sql);
-            statement.setString(1, name);
-            ResultSet resultSet = statement.executeQuery();
-
-            if (resultSet.next()) {
-                Department department = new Department();
-                department.setId(resultSet.getInt("id"));
-                department.setName(resultSet.getString("name"));
-                department.setNumberOfPatients(resultSet.getInt("number_of_patients"));
-
-                // Update the department in the cache
-                cache.addupdateDepartment(department);
-
-                session.commit();
-                return department;
-            } else {
-                session.rollback();
-                return null;
-            }
-        } catch (SQLException e) {
-            session.rollback();
-            throw e;
-        }
-    }
-
     // Update (verification done in cache class method)
     public void updateDepartment(Department department) throws SQLException {
         try {
