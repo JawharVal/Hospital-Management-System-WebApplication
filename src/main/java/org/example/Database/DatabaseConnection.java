@@ -7,7 +7,7 @@ import java.sql.Statement;
 
 public class DatabaseConnection {
 
-    public static final String DATABASE_URL = "jdbc:mysql://localhost:3307/hospitaal";
+    public static final String DATABASE_URL = "jdbc:mysql://localhost:3306/hospitaal";
     public static final String DATABASE_USER = "root";
     public static final String DATABASE_PASSWORD = "";
 
@@ -19,7 +19,6 @@ public class DatabaseConnection {
 
             // Establish the database connection
             connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASSWORD);
-            System.out.println("Database connection established successfully.");
 
 
             String sqlDepartments = "CREATE TABLE IF NOT EXISTS departments (" +
@@ -39,15 +38,11 @@ public class DatabaseConnection {
 
             Statement stmt = connection.createStatement();
             stmt.execute(sqlDepartments);
-            System.out.println("Departments table created successfully");
             stmt.execute(sqlPatients);
-            System.out.println("Patients table created successfully");
 
         } catch (SQLException e) {
-            System.err.println("Error while establishing database connection: " + e.getMessage());
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
-            System.err.println("MySQL JDBC driver not found: " + e.getMessage());
             e.printStackTrace();
         }
         return connection;

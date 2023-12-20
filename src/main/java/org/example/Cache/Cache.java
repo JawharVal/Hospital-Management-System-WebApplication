@@ -24,10 +24,6 @@ public class Cache {
         return departmentCache.get(id);
     }
 
-    //public void putDepartment(Department department) {
-    //    departmentCache.put(department.getId(), department);
-    //}
-
     public boolean isDepartmentInCache(int id) {
         return departmentCache.containsKey(id);
     }
@@ -36,27 +32,13 @@ public class Cache {
         departmentCache.remove(id);
     }
 
-    // Patient cache methods
     public Patient getPatient(int id) {
         return patientCache.get(id);
    }
 
-    public void putPatient(Patient patient) {
-        patientCache.put(patient.getId(), patient);
-    }
-
     public boolean isPatientInCache(int id) {
         return patientCache.containsKey(id);
     }
-
-    public List<Department> getAllDepartments() {
-        return new ArrayList<>(departmentCache.values());
-    }
-
-    public List<Patient> getAllPatients() {
-        return new ArrayList<>(patientCache.values());
-    }
-
 
     public void addupdateDepartment(Department department) {
         Department existingDepartment = departmentCache.get(department.getId());
@@ -64,11 +46,9 @@ public class Cache {
             // If the department already exists in the cache, update it
             existingDepartment.setName(department.getName());
             existingDepartment.setNumberOfPatients(department.getNumberOfPatients());
-            System.out.println("***Returned department from cache");
         } else {
             // If the department doesn't exist in the cache, add it
             departmentCache.put(department.getId(), department);
-            System.out.println("***Added department to cache");
         }
     }
 
@@ -80,11 +60,9 @@ public class Cache {
             existingPatient.setAge(patient.getAge());
             existingPatient.setGender(patient.getGender());
             existingPatient.setDepartment(patient.getDepartment());
-            System.out.println("***Returned patient from cache");
         } else {
             // If the patient doesn't exist in the cache, add it
             patientCache.put(patient.getId(), patient);
-            System.out.println("***Added patient to cache");
         }
     }
 

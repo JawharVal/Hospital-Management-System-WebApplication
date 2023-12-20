@@ -37,9 +37,6 @@ public class PatientDAO implements PatientRepository {
                 statement.setString(3, patient.getGender());
                 statement.setInt(4, patient.getDepartment().getId());
                 statement.executeUpdate();
-            } else {
-                // Handle the case when DepartmentDAO is not injected
-                System.err.println("DepartmentDAO is not injected and equal null. Unable to add patient.");
             }
             Department department = patient.getDepartment();
             department.incrementPatients(); // Increment the count
@@ -47,7 +44,6 @@ public class PatientDAO implements PatientRepository {
 
             session.commit();
             cache.addUpdatePatient(patient);
-            System.out.println("***Patient added to cache.");
         } catch (SQLException e) {
             // Rollback the transaction in case of an error
             session.rollback();
@@ -152,7 +148,6 @@ public class PatientDAO implements PatientRepository {
     public Patient getPatientById(int id) throws SQLException {
         // Check if the patient is in the cache first
         if (cache.isPatientInCache(id)) {
-            System.out.println("***Returned patient from cache");
             return cache.getPatient(id);
         }
         try {

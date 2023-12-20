@@ -1,0 +1,21 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="demo2:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/demo2_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="demo2" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: com.mysql:mysql-connector-j:8.1.0" />
+          <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.21.9" />
+          <element id="library" level="project" name="Maven: org.reflections:reflections:0.9.12" />
+          <element id="library" level="project" name="Maven: org.javassist:javassist:3.26.0-GA" />
+          <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
+          <element id="library" level="project" name="Maven: jstl:jstl:1.2" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="demo2/web/Web" />
+    </root>
+  </artifact>
+</component>
