@@ -16,7 +16,7 @@ import java.sql.SQLException;
 
 @Component
 @WebServlet("/EditPatientServlet")
-public class EditPatientServlet extends BaseServlet {
+public class EditPatientServlet extends BaseServlet { // Just to get the Patients info and redirect into the update page
 
     @Inject
     private PatientRepository patientRepository;

@@ -3,12 +3,12 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
          version="5.0">
-    <servlet>
+    <!-- <servlet>  THIS IS OPTIONAL IN CASE OF NO MAPPING OR ERRORS ARE MADE
         <servlet-name>UpdateDepartmentServlet</servlet-name>
         <servlet-class>org.example.Servlets.DepartmentServlets.EditDepartmentServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>UpdateDepartmentServlet</servlet-name>
         <url-pattern>/UpdateDepartmentServlet</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping> -->
 </web-app>

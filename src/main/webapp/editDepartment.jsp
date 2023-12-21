@@ -38,7 +38,7 @@
                 <h2 align="center"><strong>Edit Department</strong></h2>
                 <div class="card">
                     <div class="card-body">
-                <form action="UpdateDepartmentServlet" method="POST">
+                <form action="EditDepartmentServlet" method="POST">
                     <div class="mb-3">
                         <label for="departmentId" class="form-label">Department ID:</label>
                         <input type="text" id="departmentId" name="departmentId" value="<%= request.getAttribute("departmentId") %>" class="form-control" readonly>
